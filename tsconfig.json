@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "CommonJS",
+        // "module": "system",
+        "lib": [ "ES2015", "dom" ],
+        "outDir": "build",
+        // "outFile": "build/build.js",
+        "rootDir": "./src/",
+        "types": [ "node"]
+    }
+}
