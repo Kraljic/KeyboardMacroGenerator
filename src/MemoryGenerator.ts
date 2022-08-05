@@ -2,6 +2,8 @@ import { Macro } from './Macro';
 import { NumberUtil } from './NumberUtil';
 import *  as fs from 'fs';
 
+const OUTPUT_DIR = "./out_memory/";
+
 const MEM_SIZE = 2048;
 const MACRO_META_INFO_SIZE = 16;
 const MACRO_HEADER_SIZE = 8;
@@ -26,7 +28,10 @@ export class MemoryGenerator {
         this.writeMacroHeaders();
         this.writeMacroData();
 
-        fs.writeFile("macros.bin", this.MEMORY,  "binary", function(err) { });
+        if (fs.existsSync(OUTPUT_DIR) == false) {
+            fs.mkdir(OUTPUT_DIR,  function(err) { if (err) console.error(err); });
+        }
+        fs.writeFile(OUTPUT_DIR + "macros.bin", this.MEMORY,  "binary", function(err) { if (err) console.error(err); });
     }
     private writeMetaInfo() {
         this.writeInt32(MACRO_META_INFO_SIZE);

@@ -1,11 +1,6 @@
-import { MacroGenerator } from "./MacroGenerator";
-import { HidKey, HID_KEYS } from "./HidKeyCode";
 import { Macro } from "./Macro";
 import { MemoryGenerator } from './MemoryGenerator';
-import { type } from "os";
 import { MacroMap, MACRO_MAP } from './MacroMappings';
-
-
 
 export class Main {
 
