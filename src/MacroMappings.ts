@@ -1,13 +1,20 @@
 import { HID_KEYS, HidKey } from "./HidKeyCode";
 import { MacroGenerator } from "./MacroGenerator";
+import { MacroProfile } from "./MacroProfileUtil";
 
 export type MacroMap = {
   keyCombination: HidKey[];
   macro: MacroGenerator;
 };
 
-const mvnCleanInstall = mvnMacro("mvn clean install");
-const mvnCleanPackage = mvnMacro("mvn clean package");
+const PROFILE_INTELLIJ = MacroProfile.PROFILE_0;
+const PROFILE_INTELLIJ_KEY = new HidKey(PROFILE_INTELLIJ, false);
+
+const selectProfile_default = selectProfile(MacroProfile.PROFILE_DEFAULT);
+const selectProfile_IntelliJ = selectProfile(PROFILE_INTELLIJ);
+
+const mvnCleanInstall = mvnMacro("mvn clean install -DskipTests=true");
+const mvnCleanPackage = mvnMacro("mvn clean package -DskipTests=true");
 
 const intelliJ_build                    = keyPress(HID_KEYS.KEY_MOD_LCTRL, HID_KEYS.KEY_F9);
 const intelliJ_run                      = keyPress(HID_KEYS.KEY_MOD_LSHIFT, HID_KEYS.KEY_F10);
@@ -26,62 +33,75 @@ const intelliJ_debug_evalExpNow         = keyPress(HID_KEYS.KEY_MOD_LCTRL, HID_K
 
 export const MACRO_MAP: MacroMap[] = [
     {
+        macro: selectProfile_default,
+        keyCombination: [HID_KEYS.KEY_ESC],
+    },
+    {
+        macro: selectProfile_IntelliJ,
+        keyCombination: [HID_KEYS.KEY_NUMLOCK],
+    },
+
+    {
         macro: intelliJ_build,
-        keyCombination: [HID_KEYS.KEY_KPDOT],
+        keyCombination: [PROFILE_INTELLIJ_KEY, HID_KEYS.KEY_KPDOT],
     },
     {
         macro: intelliJ_run,
-        keyCombination: [HID_KEYS.KEY_KPENTER],
+        keyCombination: [PROFILE_INTELLIJ_KEY, HID_KEYS.KEY_KPENTER],
     },
     {
         macro: intelliJ_debug,
-        keyCombination: [HID_KEYS.KEY_KPPLUS],
+        keyCombination: [PROFILE_INTELLIJ_KEY, HID_KEYS.KEY_KPPLUS],
     },
     {
         macro: intelliJ_stop,
-        keyCombination: [HID_KEYS.KEY_KPMINUS],
+        keyCombination: [PROFILE_INTELLIJ_KEY, HID_KEYS.KEY_KPMINUS],
     },
     {
         macro: mvnCleanPackage,
-        keyCombination: [HID_KEYS.KEY_KP0],
+        keyCombination: [PROFILE_INTELLIJ_KEY, HID_KEYS.KEY_KP0],
     },
     {
         macro: intelliJ_debug_breakpoint,
-        keyCombination: [HID_KEYS.KEY_NUMLOCK],
+        keyCombination: [PROFILE_INTELLIJ_KEY, HID_KEYS.KEY_KP1],
     },
     {
         macro: intelliJ_debug_muteBreakpoints,
-        keyCombination: [HID_KEYS.KEY_KPSLASH],
+        keyCombination: [PROFILE_INTELLIJ_KEY, HID_KEYS.KEY_KP2],
     },
     {
         macro: intelliJ_debug_showBreakpoints,
-        keyCombination: [HID_KEYS.KEY_KPASTERISK],
+        keyCombination: [PROFILE_INTELLIJ_KEY, HID_KEYS.KEY_KP3],
     },
     {
         macro: intelliJ_debug_stepover,
-        keyCombination: [HID_KEYS.KEY_KP7],
+        keyCombination: [PROFILE_INTELLIJ_KEY, HID_KEYS.KEY_KP7],
     },
     {
         macro: intelliJ_debug_stepinto,
-        keyCombination: [HID_KEYS.KEY_KP8],
+        keyCombination: [PROFILE_INTELLIJ_KEY, HID_KEYS.KEY_KP8],
     },
     {
         macro: intelliJ_debug_stepout,
-        keyCombination: [HID_KEYS.KEY_KP9],
+        keyCombination: [PROFILE_INTELLIJ_KEY, HID_KEYS.KEY_KP9],
     },
     {
         macro: intelliJ_debug_runToCursor,
-        keyCombination: [HID_KEYS.KEY_KP4],
+        keyCombination: [PROFILE_INTELLIJ_KEY, HID_KEYS.KEY_KP4],
     },
     {
         macro: intelliJ_debug_evalExpDialog,
-        keyCombination: [HID_KEYS.KEY_KP5],
+        keyCombination: [PROFILE_INTELLIJ_KEY, HID_KEYS.KEY_KP5],
     },
     {
         macro: intelliJ_debug_resume,
-        keyCombination: [HID_KEYS.KEY_KP6],
+        keyCombination: [PROFILE_INTELLIJ_KEY, HID_KEYS.KEY_KP6],
     },
 ];
+
+function selectProfile(selectedProfile: MacroProfile) {
+  return new MacroGenerator().setActiveProfile(selectedProfile).build();
+}
 
 function keyPress(...hidKeys: HidKey[]) {
   return new MacroGenerator().keyPress(...hidKeys).build();

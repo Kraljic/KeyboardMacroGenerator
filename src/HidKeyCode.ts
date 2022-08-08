@@ -1,3 +1,4 @@
+import { MacroProfile } from './MacroProfileUtil';
 export class HidKey {
   private _hidCode: number;
   private _isMod: boolean;
@@ -18,6 +19,12 @@ export class HidKey {
 
 export const HID_KEYS = (function () {
   return {
+    PROFILE_DEFAULT: new HidKey(MacroProfile.PROFILE_DEFAULT, false),
+    PROFILE_0: new HidKey(MacroProfile.PROFILE_0, false),
+    PROFILE_1: new HidKey(MacroProfile.PROFILE_1, false),
+    PROFILE_2: new HidKey(MacroProfile.PROFILE_2, false),
+    PROFILE_3: new HidKey(MacroProfile.PROFILE_3, false),
+
     KEY_MOD_LCTRL: new HidKey(0x01, true),
     KEY_MOD_LSHIFT: new HidKey(0x02, true),
     KEY_MOD_LALT: new HidKey(0x04, true),

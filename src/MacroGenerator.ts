@@ -1,9 +1,10 @@
-import { HID_KEYS, HidKey } from "./HidKeyCode.js";
-import { Command } from "./CommandEnum.js";
-import { KeyEventUtil } from "./KeyEventUtil.js";
-import { DelayEventUtil } from "./DelayEventUtil.js";
-import { KeyStreamUtil } from "./KeyStreamUtil.js";
-import { NumberUtil } from "./NumberUtil.js";
+import { HID_KEYS, HidKey } from "./HidKeyCode";
+import { Command } from "./CommandEnum";
+import { KeyEventUtil } from "./KeyEventUtil";
+import { DelayEventUtil } from "./DelayEventUtil";
+import { KeyStreamUtil } from "./KeyStreamUtil";
+import { NumberUtil } from "./NumberUtil";
+import { MacroProfile, MacroProfileUtil } from './MacroProfileUtil';
 
 export class MacroGenerator {
   private macroBuffer: number[];
@@ -50,6 +51,10 @@ export class MacroGenerator {
 
   keyStream(text: string, delayTicks: number): MacroGenerator {
     return this.append(KeyStreamUtil.keyStream(text, delayTicks));
+  }
+
+  setActiveProfile(selectedProfile: MacroProfile): MacroGenerator {
+    return this.append(MacroProfileUtil.selectProfile(selectedProfile));
   }
 
   private end(): MacroGenerator {

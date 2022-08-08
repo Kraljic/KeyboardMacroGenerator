@@ -6,7 +6,10 @@ export enum Command {
   DELAY_SHORT = 0x40,
   DELAY_LONG = 0x50,
   DELAY_LONG_LONG = 0x60,
+
+  // Extended 
   KEY_STREAM = 0x81,
+  PROFILE_SELECT = 0x82,
 
   IS_MOD = 0x08,
 }
