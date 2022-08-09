@@ -49,8 +49,15 @@ export class MacroGenerator {
     return this.append(DelayEventUtil.delay(Command.DELAY_LONG_LONG, ticks));
   }
 
+  /**
+   * @deprecated Use keyStreamV2 instead
+   */
   keyStream(text: string, delayTicks: number): MacroGenerator {
     return this.append(KeyStreamUtil.keyStream(text, delayTicks));
+  }
+
+  keyStreamV2(text: string, delayTicks: number): MacroGenerator {
+    return this.append(KeyStreamUtil.keyStreamV2(text, delayTicks));
   }
 
   setActiveProfile(selectedProfile: MacroProfile): MacroGenerator {

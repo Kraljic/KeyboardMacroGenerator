@@ -10,6 +10,7 @@ export enum Command {
   // Extended 
   KEY_STREAM = 0x81,
   PROFILE_SELECT = 0x82,
+  KEY_STREAM_V2 = 0x83,
 
   IS_MOD = 0x08,
 }

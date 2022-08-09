@@ -125,7 +125,7 @@ function mvnMacro(mvnCmd: string) {
     .keyPress(HID_KEYS.KEY_MOD_LCTRL)
     .keyPress(HID_KEYS.KEY_MOD_LCTRL)
     .delayLong(5)
-    .keyStream(mvnCmd, 1)
+    .keyStreamV2(mvnCmd, 1)
     .delayLong(1)
     .keyPress(HID_KEYS.KEY_ENTER)
     .build();
