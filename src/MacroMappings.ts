@@ -66,7 +66,7 @@ const intellij_changeSignature          = intellijDo(null,                  keyP
 const intellij_commitChanges            = intellijDo(null,                  keyPress(HID_KEYS.KEY_MOD_LCTRL, HID_KEYS.KEY_K));
 const intellij_push                     = intellijDo(null,                  keyPress(HID_KEYS.KEY_MOD_LCTRL, HID_KEYS.KEY_MOD_LSHIFT, HID_KEYS.KEY_K));
 const intellij_rollback                 = intellijDo(null,                  keyPress(HID_KEYS.KEY_MOD_LCTRL, HID_KEYS.KEY_MOD_LALT, HID_KEYS.KEY_Z));
-const intellij_history                  = intellijDo(null,                  keyPress(null));
+const intellij_history                  = intellijDo(null,                  keyPress());
 
 const intellij_mvnCleanInstall         = intellijDo(null,                   mvnMacro("mvn clean install -DskipTests=true"));
 const intellij_mvnCleanPackage         = intellijDo(HID_KEYS.KEY_KP0,       mvnMacro("mvn clean package -DskipTests=true"));
@@ -159,7 +159,7 @@ export const MACRO_MAP: MacroMap[] = [
     intellij_refactor,
     intellij_rename,
     intellij_changeSignature,
-    
+
     intellij_commitChanges,
     intellij_push,
     intellij_rollback,
