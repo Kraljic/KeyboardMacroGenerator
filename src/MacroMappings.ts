@@ -42,15 +42,16 @@ const intellij_lastToolWindow           = intellijDo(null,                  keyP
 const intellij_focusEditor              = intellijDo(null,                  keyPress(HID_KEYS.KEY_ESC));
 const intellij_quickDefLookup           = intellijDo(null,                  keyPress(HID_KEYS.KEY_MOD_LCTRL, HID_KEYS.KEY_MOD_LSHIFT, HID_KEYS.KEY_I));
 const intellij_bookmark                 = intellijDo(null,                  keyPress(HID_KEYS.KEY_F11));
+const intellij_showBookmarks            = intellijDo(null,                  keyPress(HID_KEYS.KEY_MOD_LSHIFT, HID_KEYS.KEY_F11));
 
 const intellij_toolWindowProject        = intellijDo(HID_KEYS.KEY_1,        keyPress(HID_KEYS.KEY_MOD_LALT, HID_KEYS.KEY_1));
 const intellij_toolWindowCommit         = intellijDo(HID_KEYS.KEY_2,        keyPress(HID_KEYS.KEY_MOD_LALT, HID_KEYS.KEY_0));
 const intellij_toolWindowVsc            = intellijDo(HID_KEYS.KEY_3,        keyPress(HID_KEYS.KEY_MOD_LALT, HID_KEYS.KEY_9));
 const intellij_toolWindowRun            = intellijDo(HID_KEYS.KEY_4,        keyPress(HID_KEYS.KEY_MOD_LALT, HID_KEYS.KEY_4));
-const intellij_toolWindowService        = intellijDo(HID_KEYS.KEY_5,        keyPress(HID_KEYS.KEY_MOD_LALT, HID_KEYS.KEY_F8));
+const intellij_toolWindowService        = intellijDo(HID_KEYS.KEY_5,        keyPress(HID_KEYS.KEY_MOD_LALT, HID_KEYS.KEY_8));
 const intellij_toolWindowDebug          = intellijDo(HID_KEYS.KEY_6,        keyPress(HID_KEYS.KEY_MOD_LALT, HID_KEYS.KEY_5));
 const intellij_toolWindowTerminal       = intellijDo(HID_KEYS.KEY_7,        keyPress(HID_KEYS.KEY_MOD_LALT, HID_KEYS.KEY_F12));
-const intellij_toolWindowBookmarks      = intellijDo(HID_KEYS.KEY_8,        keyPress(HID_KEYS.KEY_MOD_LSHIFT, HID_KEYS.KEY_F11));
+const intellij_toolWindowBookmarks      = intellijDo(HID_KEYS.KEY_8,        keyPress(HID_KEYS.KEY_MOD_LALT, HID_KEYS.KEY_2));
 const intellij_toolWindowFinde          = intellijDo(HID_KEYS.KEY_9,        keyPress(HID_KEYS.KEY_MOD_LALT, HID_KEYS.KEY_3));
 
 const intellij_parameterInfo            = intellijDo(null,                  keyPress(HID_KEYS.KEY_MOD_LCTRL, HID_KEYS.KEY_P));
@@ -68,11 +69,11 @@ const intellij_push                     = intellijDo(null,                  keyP
 const intellij_rollback                 = intellijDo(null,                  keyPress(HID_KEYS.KEY_MOD_LCTRL, HID_KEYS.KEY_MOD_LALT, HID_KEYS.KEY_Z));
 const intellij_history                  = intellijDo(null,                  keyPress());
 
-const intellij_mvnCleanInstall         = intellijDo(null,                   mvnMacro("mvn clean install -DskipTests=true"));
 const intellij_mvnCleanPackage         = intellijDo(HID_KEYS.KEY_KP0,       mvnMacro("mvn clean package -DskipTests=true"));
-const intellij_mvnVersion              = intellijDo(HID_KEYS.KEY_HASHTILDE, mvnMacro("mvn versions:set -DnewVersion="));
-const intellij_mvnVersionNextSnapshot  = intellijDo(HID_KEYS.KEY_1,         mvnMacro("mvn versions:set -DnextSnapshot=true versions:commit"));
-const intellij_mvnVersionRelease       = intellijDo(HID_KEYS.KEY_2,         mvnMacro("mvn versions:set -DremoveSnapshot=true versions:commit"));
+const intellij_mvnCleanInstall         = intellijDo(HID_KEYS.KEY_TAB,       mvnMacro("mvn clean install -DskipTests=true"));
+const intellij_mvnVersion              = intellijDo(HID_KEYS.KEY_Q,         mvnMacro("mvn versions:set -DnewVersion="));
+const intellij_mvnVersionNextSnapshot  = intellijDo(HID_KEYS.KEY_W,         mvnMacro("mvn versions:set -DnextSnapshot=true versions:commit"));
+const intellij_mvnVersionRelease       = intellijDo(HID_KEYS.KEY_E,         mvnMacro("mvn versions:set -DremoveSnapshot=true versions:commit"));
 
 const chrome_google     = keyboardDo(HID_KEYS.KEY_F1, runMacro("chrome google.com"));
 const chrome_youtube    = keyboardDo(HID_KEYS.KEY_F2, runMacro("chrome youtube.com"));
