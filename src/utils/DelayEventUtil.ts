@@ -1,4 +1,4 @@
-import { Command } from "./CommandEnum.js";
+import { Command } from "../macro/CommandEnum.js";
 import { NumberUtil } from "./NumberUtil.js";
 export class DelayEventUtil {
   static delay(delayCmd: number, ticks: number): number[] {

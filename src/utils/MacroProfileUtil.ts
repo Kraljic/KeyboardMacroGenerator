@@ -1,4 +1,4 @@
-import { Command } from "./CommandEnum";
+import { Command } from "../macro/CommandEnum";
 
 export class MacroProfileUtil {
   static selectProfile(selectedProfile: MacroProfile) {

@@ -1,4 +1,4 @@
-import { MacroProfile } from './MacroProfileUtil';
+import { MacroProfile } from '../utils/MacroProfileUtil';
 export class HidKey {
   private _hidCode: number;
   private _isMod: boolean;

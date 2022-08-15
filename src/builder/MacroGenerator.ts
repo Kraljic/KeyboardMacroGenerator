@@ -1,10 +1,10 @@
-import { HID_KEYS, HidKey } from "./HidKeyCode";
-import { Command } from "./CommandEnum";
-import { KeyEventUtil } from "./KeyEventUtil";
-import { DelayEventUtil } from "./DelayEventUtil";
-import { KeyStreamUtil } from "./KeyStreamUtil";
-import { NumberUtil } from "./NumberUtil";
-import { MacroProfile, MacroProfileUtil } from './MacroProfileUtil';
+import { HID_KEYS, HidKey } from "../macro/HidKeyCode";
+import { Command } from "../macro/CommandEnum";
+import { KeyEventUtil } from "../utils/KeyEventUtil";
+import { DelayEventUtil } from "../utils/DelayEventUtil";
+import { KeyStreamUtil } from "../utils/KeyStreamUtil";
+import { NumberUtil } from "../utils/NumberUtil";
+import { MacroProfile, MacroProfileUtil } from '../utils/MacroProfileUtil';
 
 export class MacroGenerator {
   private macroBuffer: number[];

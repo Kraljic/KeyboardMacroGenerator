@@ -1,8 +1,8 @@
 import { isNull } from "util";
-import { HID_KEYS, HidKey } from './HidKeyCode';
+import { HID_KEYS, HidKey } from '../macro/HidKeyCode';
 import { MacroGenerator } from "./MacroGenerator";
-import { MacroProfile } from "./MacroProfileUtil";
-import { Macro } from './Macro';
+import { MacroProfile } from "../utils/MacroProfileUtil";
+import { Macro } from '../macro/Macro';
 
 export type MacroMap = {
   keyCombination: HidKey[];

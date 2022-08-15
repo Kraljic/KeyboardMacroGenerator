@@ -1,5 +1,5 @@
-import { Macro } from './Macro';
-import { NumberUtil } from './NumberUtil';
+import { Macro } from '../macro/Macro';
+import { NumberUtil } from '../utils/NumberUtil';
 import *  as fs from 'fs';
 
 const OUTPUT_DIR = "./out_memory/";

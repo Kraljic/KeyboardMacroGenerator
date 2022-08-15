@@ -1,4 +1,4 @@
-import { HidKey } from "./HidKeyCode.js";
+import { HidKey } from "../macro/HidKeyCode.js";
 
 export class TriggerCodeUtil {
   static getTriggerCode(keys: HidKey[]): number {

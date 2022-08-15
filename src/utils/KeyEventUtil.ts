@@ -1,5 +1,5 @@
-import { HidKey } from "./HidKeyCode.js";
-import { Command } from "./CommandEnum.js";
+import { HidKey } from "../macro/HidKeyCode.js";
+import { Command } from "../macro/CommandEnum.js";
 
 export class KeyEventUtil {
   static keyCommandHeader(cmd: number, hidKeys: HidKey[]): number {

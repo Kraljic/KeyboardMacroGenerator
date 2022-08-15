@@ -1,7 +1,7 @@
-import { MacroGenerator } from "./MacroGenerator.js";
+import { MacroGenerator } from "../builder/MacroGenerator.js";
 import { HidKey } from "./HidKeyCode.js";
-import { TriggerCodeUtil } from "./TriggerCodeUtil.js";
-import { NumberUtil } from "./NumberUtil.js";
+import { TriggerCodeUtil } from "../utils/TriggerCodeUtil.js";
+import { NumberUtil } from "../utils/NumberUtil.js";
 
 export class Macro {
   private trigger: number;

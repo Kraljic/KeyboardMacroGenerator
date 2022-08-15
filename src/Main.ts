@@ -1,6 +1,6 @@
-import { Macro } from "./Macro";
-import { MemoryGenerator } from './MemoryGenerator';
-import { MacroMap, MACRO_MAP } from './MacroMappings';
+import { Macro } from "./macro/Macro";
+import { MemoryGenerator } from './builder/MemoryGenerator';
+import { MacroMap, MACRO_MAP } from './builder/MacroMappings';
 
 export class Main {
   constructor() {
