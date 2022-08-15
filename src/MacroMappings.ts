@@ -2,6 +2,7 @@ import { isNull } from "util";
 import { HID_KEYS, HidKey } from './HidKeyCode';
 import { MacroGenerator } from "./MacroGenerator";
 import { MacroProfile } from "./MacroProfileUtil";
+import { Macro } from './Macro';
 
 export type MacroMap = {
   keyCombination: HidKey[];
@@ -69,11 +70,11 @@ const intellij_push                     = intellijDo(null,                  keyP
 const intellij_rollback                 = intellijDo(null,                  keyPress(HID_KEYS.KEY_MOD_LCTRL, HID_KEYS.KEY_MOD_LALT, HID_KEYS.KEY_Z));
 const intellij_history                  = intellijDo(null,                  keyPress());
 
-const intellij_mvnCleanPackage         = intellijDo(HID_KEYS.KEY_KP0,       mvnMacro("mvn clean package -DskipTests=true"));
-const intellij_mvnCleanInstall         = intellijDo(HID_KEYS.KEY_TAB,       mvnMacro("mvn clean install -DskipTests=true"));
+const intellij_mvnCleanPackage         = intellijDo(HID_KEYS.KEY_KP0,       mvnMacroExec("mvn clean package -DskipTests=true"));
+const intellij_mvnCleanInstall         = intellijDo(HID_KEYS.KEY_TAB,       mvnMacroExec("mvn clean install -DskipTests=true"));
 const intellij_mvnVersion              = intellijDo(HID_KEYS.KEY_Q,         mvnMacro("mvn versions:set -DnewVersion="));
-const intellij_mvnVersionNextSnapshot  = intellijDo(HID_KEYS.KEY_W,         mvnMacro("mvn versions:set -DnextSnapshot=true versions:commit"));
-const intellij_mvnVersionRelease       = intellijDo(HID_KEYS.KEY_E,         mvnMacro("mvn versions:set -DremoveSnapshot=true versions:commit"));
+const intellij_mvnVersionNextSnapshot  = intellijDo(HID_KEYS.KEY_W,         mvnMacroExec("mvn versions:set -DnextSnapshot=true versions:commit"));
+const intellij_mvnVersionRelease       = intellijDo(HID_KEYS.KEY_E,         mvnMacroExec("mvn versions:set -DremoveSnapshot=true versions:commit"));
 
 const chrome_google     = keyboardDo(HID_KEYS.KEY_F1, runMacro("chrome google.com"));
 const chrome_youtube    = keyboardDo(HID_KEYS.KEY_F2, runMacro("chrome youtube.com"));
@@ -209,7 +210,7 @@ function keyboardPassThrough(activatingKey: HidKey) : MacroMap {
 }
 
 function selectProfile(activatingKeys: HidKey | HidKey[], selectedProfile: MacroProfile) : MacroMap  {
-  return keyboardDo(activatingKeys, new MacroGenerator().setActiveProfile(selectedProfile).build());
+  return keyboardDo(activatingKeys, new MacroGenerator().setActiveProfile(selectedProfile));
 }
 
 function intellijDo(activatingKey: HidKey, macro: MacroGenerator) : MacroMap {
@@ -229,7 +230,7 @@ function vsCodeDo(activatingKey: HidKey, macro: MacroGenerator) : MacroMap {
 }
 
 function keyPress(...hidKeys: HidKey[]) {
-  return new MacroGenerator().keyPress(...hidKeys).build();
+  return new MacroGenerator().keyPress(...hidKeys);
 }
 
 function loginMacro(username: string, password: string) {
@@ -239,8 +240,7 @@ function loginMacro(username: string, password: string) {
     .delayLong(2)
     .keyStreamV2(password, 1)
     .delayLong(1)
-    .keyPress(HID_KEYS.KEY_ENTER)
-    .build();
+    .keyPress(HID_KEYS.KEY_ENTER);
 
   return macro;
 }
@@ -249,23 +249,22 @@ function mvnMacro(mvnCmd: string) {
   let macro = new MacroGenerator()
     .keyPress(HID_KEYS.KEY_MOD_LCTRL)
     .keyPress(HID_KEYS.KEY_MOD_LCTRL)
-    // .delayLong(5)
-    .keyStream(mvnCmd, 1)
-    // .delayLong(1)
-    .keyPress(HID_KEYS.KEY_ENTER)
-    .build();
+    .keyStream(mvnCmd, 1);
+
+  return macro;
+}
+
+function mvnMacroExec(mvnCmd: string) {
+  let macro = mvnMacro(mvnCmd).keyPress(HID_KEYS.KEY_ENTER);
 
   return macro;
 }
 
 function runMacro(runCommand: string) {
-  let macro = new MacroGenerator()
+  return new MacroGenerator()
     .keyPress(HID_KEYS.KEY_MOD_LMETA, HID_KEYS.KEY_R)
     .delayLong(3)
     .keyStreamV2(runCommand, 0)
     .delayShort(10)
-    .keyPress(HID_KEYS.KEY_ENTER)
-    .build();
-
-  return macro;
+    .keyPress(HID_KEYS.KEY_ENTER);
 }
