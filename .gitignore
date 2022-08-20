@@ -3,3 +3,4 @@ build
 
 out_memory
 *.bin
+custom-hid-comm.js

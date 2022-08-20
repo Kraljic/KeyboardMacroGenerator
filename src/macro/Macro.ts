@@ -1,32 +1,37 @@
-import { MacroGenerator } from "../builder/MacroGenerator.js";
+import { MacroGenerator } from "../generator/MacroGenerator.js";
 import { HidKey } from "./HidKeyCode.js";
 import { TriggerCodeUtil } from "../utils/TriggerCodeUtil.js";
 import { NumberUtil } from "../utils/NumberUtil.js";
 
 export class Macro {
   private trigger: number;
-  private macro: MacroGenerator;
+  private macroData: number[];
 
-  constructor(macro: MacroGenerator, ...triggerKeys: HidKey[]) {
-    this.macro = macro;
+  constructor(macroData: MacroGenerator | number[], ...triggerKeys: HidKey[]) {
+    if (Array.isArray(macroData)) {
+      this.macroData = macroData;
+    } else {
+      this.macroData = macroData.getMacroBuffer();
+    }
     this.trigger = TriggerCodeUtil.getTriggerCode(triggerKeys);
   }
+
 
   getTrigger(): number {
     return this.trigger;
   }
   getMacro(): number[] {
-    return this.macro.getMacroBuffer();
+    return this.macroData;
   }
 
   toString(): string {
     let triggerBytes = NumberUtil.intToArray(this.trigger);
 
     return `{
-    {${this.macro.getMacroBuffer().length}, ${NumberUtil.toHexArr(
+    {${this.macroData.length}, ${NumberUtil.toHexArr(
       triggerBytes
     )} }, 
-    {${NumberUtil.toHexArr(this.macro.getMacroBuffer())} },
+    {${NumberUtil.toHexArr(this.macroData)} },
 },`;
   }
 }

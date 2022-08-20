@@ -1,12 +1,13 @@
-import { HID_KEYS, HidKey } from "../macro/HidKeyCode";
 import { Command } from "../macro/CommandEnum";
-import { KeyEventUtil } from "../utils/KeyEventUtil";
+import { HidKey } from "../macro/HidKeyCode";
 import { DelayEventUtil } from "../utils/DelayEventUtil";
+import { KeyEventUtil } from "../utils/KeyEventUtil";
 import { KeyStreamUtil } from "../utils/KeyStreamUtil";
-import { NumberUtil } from "../utils/NumberUtil";
 import { MacroProfile, MacroProfileUtil } from '../utils/MacroProfileUtil';
+import { NumberUtil } from "../utils/NumberUtil";
+import { IMacroGenerator } from './IMacroGenerator';
 
-export class MacroGenerator {
+export class MacroGenerator implements IMacroGenerator {
   private macroBuffer: number[];
   private buildDone: boolean;
 
@@ -19,67 +20,65 @@ export class MacroGenerator {
     return this.macroBuffer;
   }
 
-  keyDown(...hidKeys: HidKey[]): MacroGenerator {
+  public keyDown(...hidKeys: HidKey[]): this {
     return this.append(KeyEventUtil.keyEventCommand(Command.KEY_DOWN, hidKeys));
   }
 
-  keyUp(...hidKeys: HidKey[]): MacroGenerator {
+  public keyUp(...hidKeys: HidKey[]): this {
     return this.append(KeyEventUtil.keyEventCommand(Command.KEY_UP, hidKeys));
   }
 
-  keyPress(...hidKeys: HidKey[]): MacroGenerator {
+  public keyPress(...hidKeys: HidKey[]): this {
     return this.append(
       KeyEventUtil.keyEventCommand(Command.KEY_PRESS, hidKeys)
     );
   }
 
-  delay(timeMs: number): MacroGenerator {
+  public delay(timeMs: number): this {
     return this.append(DelayEventUtil.delayGuess(timeMs));
   }
 
-  delayShort(ticks: number): MacroGenerator {
+  public delayShort(ticks: number): this {
     return this.append(DelayEventUtil.delay(Command.DELAY_SHORT, ticks));
   }
 
-  delayLong(ticks: number): MacroGenerator {
+  public delayLong(ticks: number): this {
     return this.append(DelayEventUtil.delay(Command.DELAY_LONG, ticks));
   }
 
-  delayLongLong(ticks: number): MacroGenerator {
+  public delayLongLong(ticks: number): this {
     return this.append(DelayEventUtil.delay(Command.DELAY_LONG_LONG, ticks));
   }
 
-  /**
-   * @deprecated Use keyStreamV2 instead
-   */
-  keyStream(text: string, delayTicks: number): MacroGenerator {
+  public keyStream(text: string, delayTicks: number): this {
     return this.append(KeyStreamUtil.keyStream(text, delayTicks));
   }
 
-  keyStreamV2(text: string, delayTicks: number): MacroGenerator {
+  public keyStreamV2(text: string, delayTicks: number): this {
     return this.append(KeyStreamUtil.keyStreamV2(text, delayTicks));
   }
 
-  setActiveProfile(selectedProfile: MacroProfile): MacroGenerator {
+  public setActiveProfile(selectedProfile: MacroProfile): this {
     return this.append(MacroProfileUtil.selectProfile(selectedProfile));
   }
 
-  private end(): MacroGenerator {
+  private end(): this {
     this.append([Command.END]);
     return this;
   }
 
-  build(): MacroGenerator {
+  build(): number[] {
     this.end();
     this.buildDone = true;
 
-    return this;
+    return this.macroBuffer;
   }
+
   public print(): void {
     console.log(NumberUtil.toHexArr(this.macroBuffer));
   }
 
-  private append(command: number[]): MacroGenerator {
+  private append(command: number[]): this {
     if (this.buildDone) throw "Object already built!";
 
     new Uint8Array(command).forEach((b) => this.macroBuffer.push(b));

@@ -1,16 +1,13 @@
+import { MACRO_MAP } from "./generator/MacroMappings";
+import { MemoryGenerator } from "./generator/MemoryGenerator";
 import { Macro } from "./macro/Macro";
-import { MemoryGenerator } from './builder/MemoryGenerator';
-import { MacroMap, MACRO_MAP } from './builder/MacroMappings';
 
 export class Main {
   constructor() {
-    
-    let macros: Macro[] = [ ];
-
-    MACRO_MAP.forEach((macro: MacroMap) => macros.push(new Macro(macro.macro.build(), ...macro.keyCombination)))
+    let macros: Macro[] = [...MACRO_MAP];
 
     macros.sort((a, b) => a.getTrigger() - b.getTrigger());
-    // macros.forEach((m) => console.log(m.toString()));
+    macros.forEach((m) => console.log(m.toString()));
     new MemoryGenerator(macros).generate();
   }
 }
